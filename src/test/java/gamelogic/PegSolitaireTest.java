@@ -167,4 +167,53 @@ public class PegSolitaireTest{
         assertEquals(EMPTY, board1.getTile(new BoardPosition(3, 5)));
         assertEquals(MARBLE, board1.getTile(new BoardPosition(3, 4)));
     }
+
+    @Test
+    public void solvedTests() throws InvalidPositionException, InvalidStepException{
+        final PegSolitaire englishBoard1 = new PegSolitaire(englishBoardDef);
+        assertFalse(englishBoard1.isSolved());
+
+        String[] state1 = {
+                "  ...  ",
+                "  ...  ",
+                ".......",
+                ".....OO",
+                ".......",
+                "  ...  ",
+                "  ...  "
+        };
+        final PegSolitaire board1 = new PegSolitaire(state1);
+        assertFalse(board1.isSolved());
+        board1.performStep(new BoardPosition(3, 6), new BoardPosition(3, 4));
+        assertTrue(board1.isSolved());
+
+        String[] state2 = {
+                "  ...  ",
+                "  ...  ",
+                "......O",
+                "......O",
+                ".......",
+                "  ...  ",
+                "  ...  "
+        };
+        final PegSolitaire board2 = new PegSolitaire(state2);
+        assertFalse(board2.isSolved());
+        board2.performStep(new BoardPosition(2, 6), new BoardPosition(4, 6));
+        assertTrue(board2.isSolved());
+
+        String[] state3 = {
+                "  ...  ",
+                "  .O.  ",
+                "...O...",
+                ".......",
+                ".......",
+                "  ...  ",
+                "  ...  "
+        };
+        final PegSolitaire board3 = new PegSolitaire(state3);
+        assertFalse(board3.isSolved());
+        board3.performStep(new BoardPosition(1, 3), new BoardPosition(3, 3));
+        assertTrue(board3.isSolved());
+
+    }
 }

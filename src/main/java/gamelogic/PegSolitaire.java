@@ -110,4 +110,20 @@ public class PegSolitaire {
         setTile (to, MARBLE);
         setTile (middle, EMPTY);
     }
+
+    public Integer countMarbles(){
+        Integer count = 0;
+        for (Tile[] row: board){
+            for (Tile tile: row){
+                if (tile == MARBLE){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public Boolean isSolved(){
+        return countMarbles() == 1;
+    }
 }

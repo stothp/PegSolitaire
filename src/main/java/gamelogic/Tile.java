@@ -1,7 +1,7 @@
 package gamelogic;
 
 public enum Tile {
-    NONE,
+    OUTSIDE_BOARD,
     EMPTY,
     MARBLE
 }

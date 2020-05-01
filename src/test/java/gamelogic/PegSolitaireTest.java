@@ -1,5 +1,6 @@
 package gamelogic;
 
+import controller.Board;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -97,10 +98,10 @@ public class PegSolitaireTest{
     }
 
     @Test
-    public void stepTests() throws InvalidPositionException {
+    public void stepPositionTests() throws InvalidPositionException {
         final PegSolitaire englishBoard1 = new PegSolitaire(englishBoardDef);
         assertThrows(InvalidPositionException.class, () -> englishBoard1.getValidSteps(new BoardPosition(-1, -1)));
-        assertEquals(0, englishBoard1.getValidSteps(new BoardPosition(0, 0)).size());
+        assertThrows(InvalidPositionException.class, () -> englishBoard1.getValidSteps(new BoardPosition(0, 0)));
         assertEquals(0, englishBoard1.getValidSteps(new BoardPosition(3, 3)).size());
         assertTrue(englishBoard1.getValidSteps(new BoardPosition(5, 3)).contains(new BoardPosition(3, 3)));
         assertTrue(englishBoard1.getValidSteps(new BoardPosition(1, 3)).contains(new BoardPosition(3, 3)));
@@ -137,5 +138,33 @@ public class PegSolitaireTest{
         };
         final PegSolitaire board2 = new PegSolitaire(state2);
         assertEquals(1, board2.getValidSteps(new BoardPosition(3, 6)).size());
+    }
+
+    @Test
+    public void performStepTests() throws InvalidStepException, InvalidPositionException{
+        final PegSolitaire englishBoard1 = new PegSolitaire(englishBoardDef);
+        assertThrows(InvalidPositionException.class, () -> englishBoard1.performStep(new BoardPosition(-1, -1), new BoardPosition(0, 0)));
+        assertThrows(InvalidPositionException.class, () -> englishBoard1.performStep(new BoardPosition(0, 0), new BoardPosition(0, 0)));
+        assertThrows(InvalidStepException.class, () -> englishBoard1.performStep(new BoardPosition(5, 3), new BoardPosition(5, 4)));
+        englishBoard1.performStep(new BoardPosition(5, 3), new BoardPosition(3, 3));
+        assertEquals(EMPTY, englishBoard1.getTile(new BoardPosition(5, 3)));
+        assertEquals(EMPTY, englishBoard1.getTile(new BoardPosition(4, 3)));
+        assertEquals(MARBLE, englishBoard1.getTile(new BoardPosition(3, 3)));
+
+        String[] state1 = {
+                "  ...  ",
+                "  ...  ",
+                ".......",
+                ".....OO",
+                ".......",
+                "  ...  ",
+                "  ...  "
+        };
+        final PegSolitaire board1 = new PegSolitaire(state1);
+        assertThrows(InvalidPositionException.class, () -> board1.performStep(new BoardPosition(3, 5), new BoardPosition(3, 7)));
+        board1.performStep(new BoardPosition(3, 6), new BoardPosition(3, 4));
+        assertEquals(EMPTY, board1.getTile(new BoardPosition(3, 6)));
+        assertEquals(EMPTY, board1.getTile(new BoardPosition(3, 5)));
+        assertEquals(MARBLE, board1.getTile(new BoardPosition(3, 4)));
     }
 }

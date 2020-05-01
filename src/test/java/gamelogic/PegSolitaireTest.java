@@ -1,10 +1,7 @@
 package gamelogic;
 
-import controller.BoardPosition;
-import controller.InvalidPositionException;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static gamelogic.Tile.*;
@@ -57,58 +54,58 @@ public class PegSolitaireTest{
     public void initTests() throws InvalidPositionException {
         assertEquals(3, new PegSolitaire(minimalBoardByArr).getBoardWidth());
         assertEquals(2, new PegSolitaire(minimalBoardByArr).getBoardHeight());
-        assertEquals(MARBLE, new PegSolitaire(minimalBoardByArr).getTile(0, 0));
+        assertEquals(MARBLE, new PegSolitaire(minimalBoardByArr).getTile(new BoardPosition(0, 0)));
 
         assertEquals(3, new PegSolitaire(minimalBoardDef).getBoardWidth());
         assertEquals(2, new PegSolitaire(minimalBoardDef).getBoardHeight());
-        assertEquals(MARBLE, new PegSolitaire(minimalBoardDef).getTile(1, 0));
-        assertEquals(MARBLE, new PegSolitaire(minimalBoardDef).getTile(0, 2));
-        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(-1, 0));
-        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(0, -1));
-        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(-1, -1));
-        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(2, 0));
-        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(0, 3));
-        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(2, 3));
+        assertEquals(MARBLE, new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(1, 0)));
+        assertEquals(MARBLE, new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(0, 2)));
+        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(-1, 0)));
+        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(0, -1)));
+        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(-1, -1)));
+        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(2, 0)));
+        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(0, 3)));
+        assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(2, 3)));
 
         assertEquals(7, new PegSolitaire(englishBoardDef).getBoardWidth());
         assertEquals(7, new PegSolitaire(englishBoardDef).getBoardHeight());
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(0, 0));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(0, 6));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(6, 0));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(6, 6));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(1, 1));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(5, 1));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(1, 5));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(5, 5));
-        assertEquals(MARBLE, new PegSolitaire(englishBoardDef).getTile(0, 2));
-        assertEquals(MARBLE, new PegSolitaire(englishBoardDef).getTile(2, 0));
-        assertEquals(EMPTY, new PegSolitaire(englishBoardDef).getTile(3, 3));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(0, 0)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(0, 6)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(6, 0)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(6, 6)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(1, 1)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(5, 1)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(1, 5)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(5, 5)));
+        assertEquals(MARBLE, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(0, 2)));
+        assertEquals(MARBLE, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(2, 0)));
+        assertEquals(EMPTY, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(3, 3)));
 
         assertEquals(7, new PegSolitaire(europeanBoardDef).getBoardWidth());
         assertEquals(7, new PegSolitaire(europeanBoardDef).getBoardHeight());
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(0, 0));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(0, 6));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(6, 0));
-        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(6, 6));
-        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(1, 1));
-        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(5, 1));
-        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(1, 5));
-        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(5, 5));
-        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(0, 2));
-        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(2, 0));
-        assertEquals(EMPTY, new PegSolitaire(europeanBoardDef).getTile(3, 3));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(6, 0)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(0, 6)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(6, 6)));
+        assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(0, 0)));
+        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(1, 1)));
+        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(5, 1)));
+        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(1, 5)));
+        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(5, 5)));
+        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(0, 2)));
+        assertEquals(MARBLE, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(2, 0)));
+        assertEquals(EMPTY, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(3, 3)));
     }
 
     @Test
     public void stepTests() throws InvalidPositionException {
         final PegSolitaire englishBoard1 = new PegSolitaire(englishBoardDef);
-        assertThrows(InvalidPositionException.class, () -> englishBoard1.getValidSteps(-1, -1));
-        assertEquals(0, englishBoard1.getValidSteps(0, 0).size());
-        assertEquals(0, englishBoard1.getValidSteps(3, 3).size());
-        assertTrue(englishBoard1.getValidSteps(5, 3).contains(new BoardPosition(3, 3)));
-        assertTrue(englishBoard1.getValidSteps(1, 3).contains(new BoardPosition(3, 3)));
-        assertTrue(englishBoard1.getValidSteps(3, 5).contains(new BoardPosition(3, 3)));
-        assertTrue(englishBoard1.getValidSteps(3, 1).contains(new BoardPosition(3, 3)));
+        assertThrows(InvalidPositionException.class, () -> englishBoard1.getValidSteps(new BoardPosition(-1, -1)));
+        assertEquals(0, englishBoard1.getValidSteps(new BoardPosition(0, 0)).size());
+        assertEquals(0, englishBoard1.getValidSteps(new BoardPosition(3, 3)).size());
+        assertTrue(englishBoard1.getValidSteps(new BoardPosition(5, 3)).contains(new BoardPosition(3, 3)));
+        assertTrue(englishBoard1.getValidSteps(new BoardPosition(1, 3)).contains(new BoardPosition(3, 3)));
+        assertTrue(englishBoard1.getValidSteps(new BoardPosition(3, 5)).contains(new BoardPosition(3, 3)));
+        assertTrue(englishBoard1.getValidSteps(new BoardPosition(3, 1)).contains(new BoardPosition(3, 3)));
         String[] state1 = {
                 "  ...  ",
                 "  ...  ",
@@ -119,16 +116,16 @@ public class PegSolitaireTest{
                 "  ...  "
         };
         final PegSolitaire board1 = new PegSolitaire(state1);
-        ArrayList<BoardPosition> validSteps = board1.getValidSteps(3,3);
+        ArrayList<BoardPosition> validSteps = board1.getValidSteps(new BoardPosition(3,3));
         assertTrue(validSteps.contains(new BoardPosition(1, 3)));
         assertTrue(validSteps.contains(new BoardPosition(5, 3)));
         assertTrue(validSteps.contains(new BoardPosition(3, 1)));
         assertTrue(validSteps.contains(new BoardPosition(3, 5)));
-        assertEquals(4, board1.getValidSteps(3, 3).size());
-        assertEquals(0, board1.getValidSteps(2, 3).size());
-        assertEquals(0, board1.getValidSteps(4, 3).size());
-        assertEquals(0, board1.getValidSteps(3, 2).size());
-        assertEquals(0, board1.getValidSteps(3, 4).size());
+        assertEquals(0, board1.getValidSteps(new BoardPosition(2, 3)).size());
+        assertEquals(0, board1.getValidSteps(new BoardPosition(4, 3)).size());
+        assertEquals(4, board1.getValidSteps(new BoardPosition(3, 3)).size());
+        assertEquals(0, board1.getValidSteps(new BoardPosition(3, 2)).size());
+        assertEquals(0, board1.getValidSteps(new BoardPosition(3, 4)).size());
         String[] state2 = {
                 "  ...  ",
                 "  ...  ",
@@ -139,6 +136,6 @@ public class PegSolitaireTest{
                 "  ...  "
         };
         final PegSolitaire board2 = new PegSolitaire(state2);
-        assertEquals(1, board2.getValidSteps(3, 6).size());
+        assertEquals(1, board2.getValidSteps(new BoardPosition(3, 6)).size());
     }
 }

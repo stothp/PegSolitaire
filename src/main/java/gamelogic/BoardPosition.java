@@ -1,6 +1,4 @@
-package controller;
-
-import javafx.util.Pair;
+package gamelogic;
 
 public class BoardPosition  {
     private Integer row, column;
@@ -27,5 +25,9 @@ public class BoardPosition  {
             return false;
         }
         return true;
+    }
+
+    public BoardPosition add(BoardPosition relativePosition){
+        return new BoardPosition(this.row + relativePosition.getRow(), this.column + relativePosition.getColumn());
     }
 }

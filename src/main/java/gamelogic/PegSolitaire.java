@@ -1,11 +1,6 @@
 package gamelogic;
 
-import controller.BoardPosition;
-import controller.InvalidPositionException;
-import javafx.util.Pair;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import static gamelogic.Tile.*;
 
@@ -51,18 +46,18 @@ public class PegSolitaire {
         return board.length;
     }
 
-    public Tile getTile(Integer row, Integer column) throws InvalidPositionException{
-        if (row >= board.length || row < 0){
-            throw new InvalidPositionException("The given position is invalid: Row = " + row);
+    public Tile getTile(BoardPosition position) throws InvalidPositionException{
+        if (position.getRow() >= board.length || position.getRow() < 0){
+            throw new InvalidPositionException("The given position is invalid: Row = " + position.getRow());
         }
-        if (column >= board[0].length || column < 0){
-            throw new InvalidPositionException("The given position is invalid: Column = " + column);
+        if (position.getColumn() >= board[0].length || position.getColumn() < 0){
+            throw new InvalidPositionException("The given position is invalid: Column = " + position.getColumn());
         }
-        return board[row][column];
+        return board[position.getRow()][position.getColumn()];
     }
 
-    public ArrayList<BoardPosition> getValidSteps(Integer row, Integer column)  throws InvalidPositionException{
-        Tile start = getTile(row, column);
+    public ArrayList<BoardPosition> getValidSteps(BoardPosition position)  throws InvalidPositionException{
+        Tile start = getTile(position);
 
         ArrayList<BoardPosition> validSteps = new ArrayList<BoardPosition>();
 
@@ -70,21 +65,25 @@ public class PegSolitaire {
             return validSteps;
         }
 
-        Integer[][] positionsToCheck= {{0, 2, 0, 1}, {0, -2, 0, -1}, {2, 0, 1, 0}, {-2, 0, -1, 0}};
-        for (Integer[] posToCheck: positionsToCheck){
+        Integer[][] relativePositionsToCheck= {{0, 2, 0, 1}, {0, -2, 0, -1}, {2, 0, 1, 0}, {-2, 0, -1, 0}};
+        for (Integer[] posToCheck: relativePositionsToCheck){
             try{
-                if (getTile(row + posToCheck[0], column + posToCheck[1]) != EMPTY) {
+                if (getTile(new BoardPosition(position.getRow() + posToCheck[0], position.getColumn() + posToCheck[1])) != EMPTY) {
                     continue;
                 }
-                if (getTile(row + posToCheck[2], column + posToCheck[3]) != MARBLE) {
+                if (getTile(new BoardPosition(position.getRow() + posToCheck[2], position.getColumn() + posToCheck[3])) != MARBLE) {
                     continue;
                 }
             } catch (InvalidPositionException e){
                 continue;
             }
-            validSteps.add(new BoardPosition(row + posToCheck[0], column + posToCheck[1]));
+            validSteps.add(new BoardPosition(position.getRow() + posToCheck[0], position.getColumn() + posToCheck[1]));
         }
 
         return (validSteps);
+    }
+
+    public void performStep(BoardPosition from, BoardPosition to){
+
     }
 }

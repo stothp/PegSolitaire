@@ -1,4 +1,4 @@
-package controller;
+package gamelogic;
 
 public class InvalidPositionException extends Exception{
     public InvalidPositionException(String message) {

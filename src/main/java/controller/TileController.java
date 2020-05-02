@@ -10,13 +10,14 @@ import java.io.IOException;
 
 public class TileController extends Pane {
     private Node currentNode;
-    private Node nodeEmpty, nodeMarble, nodeSelected;
+    private Node nodeEmpty, nodeMarble, nodeSelected, nodeSelectable;
     private State currentState;
 
     public enum State{
         EMPTY,
         MARBLE,
-        SELECTED
+        SELECTED,
+        SELECTABLE
     }
 
     public TileController() {
@@ -35,6 +36,7 @@ public class TileController extends Pane {
             this.nodeEmpty = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tile_empty.fxml"));
             this.nodeMarble = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tile_with_marble.fxml"));
             this.nodeSelected = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tile_selected.fxml"));
+            this.nodeSelectable = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tile_selectable.fxml"));
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
@@ -54,6 +56,9 @@ public class TileController extends Pane {
                 break;
             case SELECTED:
                 currentNode = nodeSelected;
+                break;
+            case SELECTABLE:
+                currentNode = nodeSelectable;
                 break;
         }
         getChildren().add(currentNode);

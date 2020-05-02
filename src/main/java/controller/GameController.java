@@ -53,6 +53,9 @@ public class GameController {
                     if (validsteps.size() > 0) {
                         board.setTileState(event.getRow(), event.getColumn(), TileController.State.SELECTED);
                     }
+                    for (BoardPosition pos: validsteps){
+                        board.setTileState(pos.getRow(), pos.getColumn(), TileController.State.SELECTABLE);
+                    }
                 } catch (InvalidPositionException e){
 
                 }

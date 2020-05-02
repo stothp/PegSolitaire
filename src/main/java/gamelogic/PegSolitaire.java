@@ -1,7 +1,5 @@
 package gamelogic;
 
-import controller.Board;
-
 import java.util.ArrayList;
 
 import static gamelogic.Tile.*;
@@ -41,11 +39,11 @@ public class PegSolitaire {
         }
     }
 
-    public int getBoardWidth() {
+    public int getColumsCount() {
         return board[0].length;
     }
 
-    public int getBoardHeight() {
+    public int getRowsCount() {
         return board.length;
     }
 

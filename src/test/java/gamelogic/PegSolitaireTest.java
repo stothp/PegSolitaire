@@ -1,6 +1,5 @@
 package gamelogic;
 
-import controller.Board;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -53,12 +52,12 @@ public class PegSolitaireTest{
 
     @Test
     public void initTests() throws InvalidPositionException {
-        assertEquals(3, new PegSolitaire(minimalBoardByArr).getBoardWidth());
-        assertEquals(2, new PegSolitaire(minimalBoardByArr).getBoardHeight());
+        assertEquals(3, new PegSolitaire(minimalBoardByArr).getColumsCount());
+        assertEquals(2, new PegSolitaire(minimalBoardByArr).getRowsCount());
         assertEquals(MARBLE, new PegSolitaire(minimalBoardByArr).getTile(new BoardPosition(0, 0)));
 
-        assertEquals(3, new PegSolitaire(minimalBoardDef).getBoardWidth());
-        assertEquals(2, new PegSolitaire(minimalBoardDef).getBoardHeight());
+        assertEquals(3, new PegSolitaire(minimalBoardDef).getColumsCount());
+        assertEquals(2, new PegSolitaire(minimalBoardDef).getRowsCount());
         assertEquals(MARBLE, new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(1, 0)));
         assertEquals(MARBLE, new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(0, 2)));
         assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(-1, 0)));
@@ -68,8 +67,8 @@ public class PegSolitaireTest{
         assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(0, 3)));
         assertThrows(InvalidPositionException.class, () -> new PegSolitaire(minimalBoardDef).getTile(new BoardPosition(2, 3)));
 
-        assertEquals(7, new PegSolitaire(englishBoardDef).getBoardWidth());
-        assertEquals(7, new PegSolitaire(englishBoardDef).getBoardHeight());
+        assertEquals(7, new PegSolitaire(englishBoardDef).getColumsCount());
+        assertEquals(7, new PegSolitaire(englishBoardDef).getRowsCount());
         assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(0, 0)));
         assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(0, 6)));
         assertEquals(OUTSIDE_BOARD, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(6, 0)));
@@ -82,8 +81,8 @@ public class PegSolitaireTest{
         assertEquals(MARBLE, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(2, 0)));
         assertEquals(EMPTY, new PegSolitaire(englishBoardDef).getTile(new BoardPosition(3, 3)));
 
-        assertEquals(7, new PegSolitaire(europeanBoardDef).getBoardWidth());
-        assertEquals(7, new PegSolitaire(europeanBoardDef).getBoardHeight());
+        assertEquals(7, new PegSolitaire(europeanBoardDef).getColumsCount());
+        assertEquals(7, new PegSolitaire(europeanBoardDef).getRowsCount());
         assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(6, 0)));
         assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(0, 6)));
         assertEquals(OUTSIDE_BOARD, new PegSolitaire(europeanBoardDef).getTile(new BoardPosition(6, 6)));

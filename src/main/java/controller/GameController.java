@@ -1,19 +1,18 @@
 package controller;
 
-import com.sun.nio.sctp.PeerAddressChangeNotification;
-import gamelogic.*;
+import gamelogic.BoardPosition;
+import gamelogic.InvalidPositionException;
+import gamelogic.InvalidStepException;
+import gamelogic.PegSolitaire;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameController {
-    private PegSolitaire solitaire;
-    private BoardController board;
-
     private static final String[] englishBoardDef = {
             "  OOO  ",
             "  OOO  ",
@@ -23,17 +22,17 @@ public class GameController {
             "  OOO  ",
             "  OOO  "
     };
-
     private static final String[] testDef = {
             "  ...  ",
             "  ...  ",
-            "..OOO..",
-            "..OOO..",
-            "..OOO..",
+            "..O....",
+            "..O....",
+            ".......",
             "  ...  ",
             "  ...  "
     };
-
+    private PegSolitaire solitaire;
+    private BoardController board;
     private BoardPosition selection = null;
     private ArrayList<BoardPosition> validSteps = null;
 
@@ -47,8 +46,8 @@ public class GameController {
     }
 
     @FXML
-    public void initialize(){
-        solitaire = new PegSolitaire(testDef);
+    public void initialize() {
+        solitaire = new PegSolitaire(englishBoardDef);
         //mainContainer.getChildren().add(new Label("Heló"));
         //vbox1.setVgrow(pane1, Priority.ALWAYS);
         this.board = new BoardController(solitaire.getRowsCount(), solitaire.getColumsCount());
@@ -65,7 +64,7 @@ public class GameController {
                         validSteps = solitaire.getValidSteps(tileClicked);
                         if (validSteps.size() > 0) {
                             board.setTileState(event.getRow(), event.getColumn(), TileController.State.SELECTED);
-                            for (BoardPosition pos: validSteps){
+                            for (BoardPosition pos : validSteps) {
                                 board.setTileState(pos.getRow(), pos.getColumn(), TileController.State.SELECTABLE);
                             }
                             selection = tileClicked;
@@ -73,11 +72,12 @@ public class GameController {
                         return;
                     }
 
-                    if (validSteps.contains(tileClicked)){
+                    if (validSteps.contains(tileClicked)) {
                         solitaire.performStep(selection, tileClicked);
                         selection = null;
                         validSteps = null;
                         refreshBoard();
+                        checkGameEnd();
                         return;
                     }
 
@@ -85,7 +85,7 @@ public class GameController {
                     if (validSteps.size() > 0) {
                         refreshBoard();
                         board.setTileState(event.getRow(), event.getColumn(), TileController.State.SELECTED);
-                        for (BoardPosition pos: validSteps){
+                        for (BoardPosition pos : validSteps) {
                             board.setTileState(pos.getRow(), pos.getColumn(), TileController.State.SELECTABLE);
                         }
                         selection = tileClicked;
@@ -96,16 +96,37 @@ public class GameController {
                     validSteps = null;
                     refreshBoard();
 
-                } catch (InvalidPositionException e){
-                } catch (InvalidStepException e){
+                } catch (InvalidPositionException e) {
+                } catch (InvalidStepException e) {
                 }
             }
         });
     }
 
+    private void checkGameEnd() {
+        if (solitaire.isSolved()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Game has been ended");
+            alert.setContentText("Congratulations! You've successfully solved the puzzle!");
+
+            alert.showAndWait();
+            return;
+        }
+
+        if (solitaire.isEnded()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Game has been ended");
+            alert.setContentText("Sorry, you failed in solving this puzzle. Just give it another try!");
+
+            alert.showAndWait();
+            return;
+        }
+
+    }
+
     private void refreshBoard() {
-        for (int r = 0; r < solitaire.getRowsCount(); r++){
-            for (int c = 0; c < solitaire.getColumsCount(); c++){
+        for (int r = 0; r < solitaire.getRowsCount(); r++) {
+            for (int c = 0; c < solitaire.getColumsCount(); c++) {
                 try {
                     switch (solitaire.getTile(new BoardPosition(r, c))) {
                         case MARBLE:
@@ -115,14 +136,14 @@ public class GameController {
                             board.setTileState(r, c, TileController.State.EMPTY);
                             break;
                     }
-                } catch (InvalidPositionException e){
+                } catch (InvalidPositionException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
 
-    public void menuNewGameClicked(){
+    public void menuNewGameClicked() {
     }
 
 }

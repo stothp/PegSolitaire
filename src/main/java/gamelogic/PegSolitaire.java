@@ -124,4 +124,20 @@ public class PegSolitaire {
     public Boolean isSolved(){
         return countMarbles() == 1;
     }
+
+    public Boolean isEnded(){
+        for (int row = 0; row < getRowsCount(); row++){
+            for (int column = 0; column < getColumsCount(); column++){
+                try {
+                    BoardPosition pos = new BoardPosition(row, column);
+                    if (getTile(pos) == MARBLE && getValidSteps(pos).size() > 0) {
+                        return false;
+                    }
+                } catch (InvalidPositionException e){
+                }
+            }
+        }
+        return true;
+    }
+
 }

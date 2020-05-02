@@ -7,9 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class PegSolitaireApp extends Application {
-    public PegSolitaireApp() {
-        super();
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -17,8 +14,8 @@ public class PegSolitaireApp extends Application {
         stage.setTitle("Peg Solitaire");
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
         stage.setResizable(false);
+        stage.show();
 //        stage.sizeToScene();
     }
 }

@@ -39,15 +39,15 @@ public class PegSolitaireTest{
             "  OOO  "
     };
 
-    private String[] englishBoardsDef = {
-            "  ...  ",
-            "  ...  ",
-            "...O...",
-            "..OOO..",
-            "...O...",
-            "  ...  ",
-            "  ...  "
-    };
+//    private String[] englishBoardsDef = {
+//            "  ...  ",
+//            "  ...  ",
+//            "...O...",
+//            "..OOO..",
+//            "...O...",
+//            "  ...  ",
+//            "  ...  "
+//    };
 
 
     @Test
@@ -213,6 +213,58 @@ public class PegSolitaireTest{
         assertFalse(board3.isSolved());
         board3.performStep(new BoardPosition(1, 3), new BoardPosition(3, 3));
         assertTrue(board3.isSolved());
+    }
+
+    @Test
+    public void endedTests() {
+        String[] state1 = {
+                "  ...  ",
+                "  ...  ",
+                ".......",
+                ".....OO",
+                ".......",
+                "  ...  ",
+                "  ...  "
+        };
+        final PegSolitaire board1 = new PegSolitaire(state1);
+        assertFalse(board1.isEnded());
+
+        String[] state2 = {
+                "  ...  ",
+                "  ...  ",
+                ".......",
+                "....O.O",
+                ".......",
+                "  ...  ",
+                "  ...  "
+        };
+        final PegSolitaire board2 = new PegSolitaire(state2);
+        assertTrue(board2.isEnded());
+
+        String[] state3 = {
+                "  O..  ",
+                "  ...  ",
+                ".......",
+                "....O..",
+                "O......",
+                "  ...  ",
+                "  .O.  "
+        };
+        final PegSolitaire board3 = new PegSolitaire(state3);
+        assertTrue(board3.isEnded());
+
+        String[] state4 = {
+                "  ...  ",
+                "  ...  ",
+                ".......",
+                "....O..",
+                ".......",
+                "  ...  ",
+                "  ...  "
+        };
+        final PegSolitaire board4 = new PegSolitaire(state4);
+        assertTrue(board4.isEnded());
 
     }
+
 }

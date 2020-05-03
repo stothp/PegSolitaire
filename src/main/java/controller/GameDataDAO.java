@@ -1,0 +1,35 @@
+package controller;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
+public class GameDataDAO {
+    static private GameDataDAO instance;
+    static private EntityManager entityManager;
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    private GameDataDAO() {
+    }
+
+    public static GameDataDAO getInstance(){
+        if (instance == null) {
+            instance = new GameDataDAO();
+            instance.setEntityManager(Persistence.createEntityManagerFactory("org.hibernate.mysql.jpa").createEntityManager());
+        }
+        return instance;
+    }
+
+    public void persist(GameData gameData){
+        entityManager.getTransaction().begin();
+        entityManager.persist(gameData);
+        entityManager.getTransaction().commit();
+    }
+
+}

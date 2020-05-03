@@ -2,23 +2,14 @@ package controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
 public class TileController extends Pane {
     private Node currentNode;
     private Node nodeEmpty, nodeMarble, nodeSelected, nodeSelectable;
-    private State currentState;
-
-    public enum State{
-        EMPTY,
-        MARBLE,
-        SELECTED,
-        SELECTABLE
-    }
+    private TileState currentState;
 
     public TileController() {
         FXMLLoader fxmlLoader = new FXMLLoader(
@@ -64,7 +55,7 @@ public class TileController extends Pane {
         getChildren().add(currentNode);
     }
 
-    public void setState(State state){
+    public void setState(TileState state){
         if (this.currentState == state) {
             return;
         }

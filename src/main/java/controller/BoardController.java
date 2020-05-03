@@ -1,6 +1,5 @@
 package controller;
 
-import gamelogic.Tile;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,7 +36,7 @@ public class BoardController extends GridPane {
     }
 
 
-    public void setTileState(Integer row, Integer column, TileController.State state){
+    public void setTileState(Integer row, Integer column, TileState state){
         if (tiles[row][column] == null){
             tiles[row][column] = new TileController();
             tiles[row][column].setOnMouseClicked(new EventHandler<MouseEvent>() {

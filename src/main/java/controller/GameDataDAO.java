@@ -2,6 +2,7 @@ package controller;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class GameDataDAO {
     static private GameDataDAO instance;
@@ -30,6 +31,12 @@ public class GameDataDAO {
         entityManager.getTransaction().begin();
         entityManager.persist(gameData);
         entityManager.getTransaction().commit();
+    }
+
+    public List<GameData> listData(int n, BoardType boardType) {
+        return entityManager.createQuery("SELECT d FROM GameData d WHERE d.boardType = " + boardType.ordinal() +" ORDER BY d.remainingMarbles, d.duration DESC", GameData.class)
+                .setMaxResults(n)
+                .getResultList();
     }
 
 }

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.Duration;
+import java.time.ZonedDateTime;
 
 @Entity
 public class GameData {
@@ -15,7 +16,24 @@ public class GameData {
     private String name;
     private BoardType boardType;
     private Integer remainingMarbles;
+    private ZonedDateTime startTime;
     private Duration duration;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public ZonedDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(ZonedDateTime startTime) {
+        this.startTime = startTime;
+    }
 
     public String getName() {
         return name;

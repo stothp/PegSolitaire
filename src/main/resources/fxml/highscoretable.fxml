@@ -3,22 +3,55 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root type="javafx.scene.layout.VBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="722.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView prefWidth="700.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <TabPane prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="English Board">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <TableView fx:id="engTable" prefWidth="700.0">
+                          <columns>
+                              <TableColumn fx:id="engPlayer" prefWidth="75.0" text="Player" />
+                              <TableColumn fx:id="engMarbles" prefWidth="162.0" text="Remaining Marbles" />
+                              <TableColumn fx:id="engDuration" prefWidth="201.0" text="Duration" />
+                              <TableColumn fx:id="engStarted" prefWidth="210.0" text="Started" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="European Board">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <TableView fx:id="eurTable" prefWidth="700.0">
+                           <columns>
+                              <TableColumn fx:id="eurPlayer" prefWidth="75.0" text="Player" />
+                              <TableColumn fx:id="eurMarbles" prefWidth="162.0" text="Remaining Marbles" />
+                              <TableColumn fx:id="eurDuration" prefWidth="201.0" text="Duration" />
+                              <TableColumn fx:id="eurStarted" prefWidth="210.0" text="Started" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
       <ButtonBar prefWidth="622.0">
         <buttons>
-            <Button mnemonicParsing="false" text="Back" onAction="#backToGame" ButtonBar.buttonData="LEFT" />
-          <Button mnemonicParsing="false" text="Exit" onAction="#exitGame" ButtonBar.buttonData="RIGHT" />
+            <Button mnemonicParsing="false" onAction="#backToGame" text="Back" ButtonBar.buttonData="LEFT" />
+          <Button mnemonicParsing="false" onAction="#exitGame" text="Exit" ButtonBar.buttonData="RIGHT" />
         </buttons>
          <VBox.margin>
             <Insets />

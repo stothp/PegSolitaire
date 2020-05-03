@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,6 +19,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class GameController {
@@ -52,6 +57,7 @@ public class GameController {
     private BoardController board;
     private BoardPosition selection = null;
     private ArrayList<BoardPosition> validSteps = null;
+    private GameData gameData;
 
     @FXML
     private VBox vbox1;
@@ -80,12 +86,6 @@ public class GameController {
     }
 
     public void startNewGame() {
-//        GameData gd = new GameData();
-//        gd.setBoardType(BoardType.ENGLISH);
-//        gd.setName("STP");
-//        gd.setRemainingMarbles(2);
-//        GameDataDAO gdd = GameDataDAO.getInstance();
-//        gdd.persist(gd);
         if (name.getText().trim().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Missing name");
@@ -94,8 +94,6 @@ public class GameController {
             alert.showAndWait();
             return;
         }
-
-
 
         String[] boardDef;
         switch (boardType.getSelectionModel().getSelectedItem().getKey()) {
@@ -106,6 +104,12 @@ public class GameController {
                 boardDef = englishBoardDef;
         }
         solitaire = new PegSolitaire(boardDef);
+
+        gameData = new GameData();
+        gameData.setBoardType(boardType.getSelectionModel().getSelectedItem().getKey());
+        gameData.setName(name.getText());
+        gameData.setStartTime(ZonedDateTime.now());
+
         //mainContainer.getChildren().add(new Label("Heló"));
         //vbox1.setVgrow(pane1, Priority.ALWAYS);
         if (this.board != null) {
@@ -174,24 +178,22 @@ public class GameController {
     }
 
     private void checkGameEnd() {
-        if (solitaire.isSolved()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Game has been ended");
-            alert.setContentText("Congratulations! You've successfully solved the puzzle!");
-
-            alert.showAndWait();
-            return;
-        }
-
-        if (solitaire.isEnded()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = null;
+        if (solitaire.isSolved() || solitaire.isEnded()) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Game has been ended");
             alert.setContentText("Sorry, you failed in solving this puzzle.\nJust give it another try!");
-
-            alert.showAndWait();
+        } else if (solitaire.isSolved()) {
+            alert.setContentText("Congratulations! You've successfully solved the puzzle!");
+        } else {
             return;
         }
+        alert.showAndWait();
 
+        gameData.setDuration(Duration.between(gameData.getStartTime(), ZonedDateTime.now()));
+        gameData.setRemainingMarbles(solitaire.countMarbles());
+        GameDataDAO gdd = GameDataDAO.getInstance();
+        gdd.persist(gameData);
     }
 
     private void refreshBoard() {

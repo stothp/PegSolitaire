@@ -116,6 +116,7 @@ public class GameController {
             pane1.getChildren().remove(this.board);
         }
         this.board = new BoardController(solitaire.getRowsCount(), solitaire.getColumsCount());
+        this.board.setBoardType(boardType.getSelectionModel().getSelectedItem().getKey());
         pane1.getChildren().add(board);
         pane1.autosize();
         refreshBoard();

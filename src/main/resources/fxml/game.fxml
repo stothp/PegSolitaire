@@ -10,14 +10,14 @@
 
 <VBox fx:id="vbox1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <Pane fx:id="pane1" prefHeight="700.0" prefWidth="700.0" />
+      <Pane fx:id="pane1" prefHeight="800.0" prefWidth="800.0" />
       <ButtonBar prefWidth="200.0">
         <buttons>
           <Button fx:id="buttonNew" mnemonicParsing="false" onAction="#startNewGame" text="New Game" ButtonBar.buttonData="LEFT" />
             <ComboBox fx:id="boardType" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Board Type" ButtonBar.buttonData="LEFT" />
             <Button fx:id="showHighScore" mnemonicParsing="false" onAction="#showHighScore" text="High Score Table" ButtonBar.buttonData="RIGHT" />
             <Button fx:id="buttonExit" mnemonicParsing="false" onAction="#exitGame" text="Exit" ButtonBar.buttonData="RIGHT" />
-            <TextField fx:id="name" ButtonBar.buttonData="LEFT"/>
+            <TextField fx:id="name" ButtonBar.buttonData="LEFT" />
         </buttons>
          <VBox.margin>
             <Insets />

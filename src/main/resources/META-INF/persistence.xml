@@ -7,10 +7,10 @@
 
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/peg_solitaire"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://remotemysql.com:3306/HDjWWMqw1H"/>
             <property name="hibernate.connection.autocommit" value="false"/>
-            <property name="hibernate.connection.username" value="stp"/>
-            <property name="hibernate.connection.password" value="secret"/>
+            <property name="hibernate.connection.username" value="HDjWWMqw1H"/>
+            <property name="hibernate.connection.password" value="M5lbP68cJx"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.connection.CharSet" value="utf8"/>
             <property name="hibernate.connection.characterEncoding" value="utf8"/>

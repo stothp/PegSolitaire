@@ -1,7 +1,7 @@
 # PegSolitaire
 Coursework for the Software Engineering course
 
-To run under linux:
+To run type:
 ~~~
 git clone https://github.com/stothp/PegSolitaire.git
 cd PegSolitaire

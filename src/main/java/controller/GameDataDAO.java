@@ -34,7 +34,7 @@ public class GameDataDAO {
     }
 
     public List<GameData> listData(int n, BoardType boardType) {
-        return entityManager.createQuery("SELECT d FROM GameData d WHERE d.boardType = " + boardType.ordinal() +" ORDER BY d.remainingMarbles, d.duration DESC", GameData.class)
+        return entityManager.createQuery("SELECT d FROM GameData d WHERE d.boardType = " + boardType.ordinal() +" ORDER BY d.remainingMarbles, d.duration", GameData.class)
                 .setMaxResults(n)
                 .getResultList();
     }
